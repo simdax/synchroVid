@@ -1,11 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- 
 
-# communication avec supercollider
-# oscPort=57121
-import supercollider
-from osc import *
-
 import cv2
 
 def tbCallback(n):
