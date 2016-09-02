@@ -2,12 +2,8 @@ import cv2
 from PyQt4 import QtGui, QtCore
 
 
-# communication avec supercollider
-# oscPort=57121
-import supercollider
-from osc import *
 
-class Capture():
+import cv2
 
 
     
