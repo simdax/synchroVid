@@ -1,11 +1,10 @@
 import OSC
 
-c = OSC.OSCClient()
-c.connect(("localhost", 57121))   # connect to SuperCollider
 
-def bob():
-    c.send(OSC.OSCMessage("/startup", ))
+net = OSC.OSCClient()
+net.connect(("localhost", 57120))   # connect to SuperCollider
 
-def kill():
-    c.send(OSC.OSCMessage("/quit"))
+def msg(m):
+    net.send(OSC.OSCMessage("/"+str(m), ))
+        
     
