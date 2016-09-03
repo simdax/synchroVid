@@ -3,14 +3,14 @@ from PyQt4 import QtGui, QtCore
 
 # communication avec supercollider
 # oscPort=57121
-import supercollider
+#import supercollider
 from osc import *
 import cv2
 
+from dialog import Example
+
 class Capture():
 
-
-    
     def __init__(self):
         self.c = cv2.VideoCapture("/home/simdax/Vidéos/Nirvana - In Bloom.mp4")
         self.go = False
@@ -22,13 +22,12 @@ class Capture():
     def togglePause(self):
         if self.go == False:
             self.go = True
-            print "plus pause"
+
         else:
             self.go=False
-            print "pause"
+
             
     def startCapture(self):
-        print "pressed start"
         self.togglePause()
         cv2.namedWindow("Capture")
         nbFrames= self.c.get(7)
@@ -40,17 +39,16 @@ class Capture():
             cv2.waitKey(25)
 
     def quitCapture(self):
-        print "pressed Quit"
         self.go=False
         cv2.destroyAllWindows()
         self.c.release()
         QtCore.QCoreApplication.quit()
 
 
-class Window(QtGui.QWidget):
-    def __init__(self):
+class PanelControl(QtGui.QWidget):
+    def __init__(self, parent=None):
 
-        QtGui.QWidget.__init__(self)
+        QtGui.QWidget.__init__(self, parent)
         self.setWindowTitle('Control Panel')
 
         self.capture = Capture()
@@ -72,5 +70,7 @@ class Window(QtGui.QWidget):
 #if __name__ == '__main__' :
 import sys
 app = QtGui.QApplication(sys.argv)
-window = Window()
+window = Example()
+widget = PanelControl(window)
+#window.setCentralWidget(window)
 sys.exit(app.exec_())
