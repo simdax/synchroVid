@@ -1,17 +1,7 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-"""
-ZetCode PyQt4 tutorial 
-
-In this example, we select a file with a
-QtGui.QFileDialog and display its contents
-in a QtGui.QTextEdit.
-
-author: Jan Bodnar
-website: zetcode.com 
-last edited: October 2011
-"""
+from capture import Capture
+import cv2
 
 import sys
 from PyQt4 import QtGui
@@ -45,14 +35,10 @@ class Example(QtGui.QMainWindow):
         
     def showDialog(self):
 
-        fname = QtGui.QFileDialog.getOpenFileName(self, 'Open file', '/home')
-        #cv2.VideoCapture(fname)
-        
-        # f = open(fname, 'r')     
-        # with f:
-        #     f
-            #data = f.read()
-#            self.textEdit.setText(data) 
+        fname = QtGui.QFileDialog.getOpenFileName(self, 'Open file', '/home/simdax/Videos/')
+        a=self.children()[-1]
+        #a.capture.quitCapture()
+        a.capture.c=cv2.VideoCapture(str(fname))
                                 
         
 def main():
