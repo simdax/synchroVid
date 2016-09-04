@@ -3,7 +3,7 @@ from PyQt4 import QtGui, QtCore
 
 # communication avec supercollider
 # oscPort=57121
-#import supercollider
+import supercollider
 from osc import *
 
 import cv2
@@ -17,6 +17,10 @@ class Capture():
         #helper
     def tbCallback(self, n):
         self.c.set(1,n)
+        ret, frame = self.c.read()
+        cv2.imshow("Capture", frame)
+        msg("offset", self.c.get(0))
+        msg("play")
         
     def togglePause(self):
         if self.go == False:
@@ -24,6 +28,7 @@ class Capture():
             self.go = True
             print "plus pause"
         else:
+            msg("pause")
             self.go=False
             print "pause"
             
@@ -44,6 +49,7 @@ class Capture():
         cv2.destroyAllWindows()
         self.c.release()
         QtCore.QCoreApplication.quit()
+        sys.exit()
 
 
 class Window(QtGui.QWidget):
@@ -72,4 +78,4 @@ class Window(QtGui.QWidget):
 import sys
 app = QtGui.QApplication(sys.argv)
 window = Window()
-sys.exit(app.exec_())
+

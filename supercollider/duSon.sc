@@ -3,7 +3,7 @@
 Pdef(\a,
 Pbind(
 		\type, \midi,
-		\midiout, MIDIOut(0),
+		\midiout, MIDIOut(1),
 		\degree, Prand([0,1,2,3],inf ),
 		\dur, Prand([0.5,1,2], inf),
 	)
@@ -15,17 +15,17 @@ Pdef(\b, Pbind(
 	\dur, 2
 ));
 
-Pdef(\tout, {arg seed=0, offset=0;
-	PFF(offset,
+Pdefn(\offset, 0);
+Pdefn(\seed, 0);
+
+Pdef(\tout,
+	PFF(Pdefn(\offset).asStream,
 		Ppar([
 			Pbind(),
 			Pdef(\b)
-		]) <> Pseed(seed, Pdef(\a))
-	)
-}
-)
+		]) <> Pseed(Pdefn(\seed), Pdef(\a))
+	).trace
+).quant_(0)
 
 )
-
-
 

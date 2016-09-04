@@ -3,17 +3,31 @@
 ("hello ! SuperCollider s'ouvre avec le port "++NetAddr.langPort).postln;
 
 //ShutDown.add({"supercollider s'éteint ".postln});
-Zyn.port=0;
 "duSon.sc".loadRelative;
 
-OSCdef(\quit, {0.exit}, \quit).permanent_(true);
-OSCdef(\play, { arg msg;
-	var seed, offset;
-	#seed, offset=msg[1..]???[0,0];
-	("playing avec seed et offset de : "++[seed, offset]).postln;
-	(
-		Pdef(\tout) <> (seed:seed, offset:offset)
-	).play
-}, \play).permanent_(true)
+~dic=(
+	quit: {0.exit},
+	play: { arg msg;
+		var seed;
+		var p=Pdef(\tout);
+		seed=msg[1] ? 0;
+		("playing avec seed de : "++[seed]).postln;
+		//Pdef(\tout, p);
+		Pdef(\tout).play
+	},
+	pause: {Pdef(\tout).pause;
+		NetAddr("localhost", 9000).sendMsg("/Panic")},
+	resume: {Pdef(\tout).resume},
+	offset: {arg msg;
+		Pdefn(\offset, msg[1]/1000);
+		NetAddr("localhost", 9000).sendMsg("/Panic");
+		Pdef(\tout).stop; Pdef(\tout).play;
+	},
+);
+~dic.collect({|a, b|
+	OSCdef(b, a, b).permanent_(true)
+});
+
 
 )
+
