@@ -1,61 +1,19 @@
+# -*- coding: utf-8 -*-
+
 import cv2
 from PyQt4 import QtGui, QtCore
 
 # communication avec supercollider
 # oscPort=57121
-import supercollider
+#import supercollider
 from osc import *
+from capture import Capture
+from dialog import Example
 
-import cv2
+class PanelControl(QtGui.QWidget):
+    def __init__(self, parent=None):
 
-class Capture():
-     
-    def __init__(self):
-        self.c = cv2.VideoCapture("/home/simdax/Vidéos/Nirvana - In Bloom.mp4")
-        self.go = False
-
-        #helper
-    def tbCallback(self, n):
-        self.c.set(1,n)
-        ret, frame = self.c.read()
-        cv2.imshow("Capture", frame)
-        msg("offset", self.c.get(0))
-        msg("play")
-        
-    def togglePause(self):
-        if self.go == False:
-            msg("play")
-            self.go = True
-            print "plus pause"
-        else:
-            msg("pause")
-            self.go=False
-            print "pause"
-            
-    def startCapture(self):
-        print "pressed start"
-        self.togglePause()
-        cv2.namedWindow("Capture")
-        nbFrames= self.c.get(7)
-        cv2.createTrackbar("test", "Capture", cv2.getTrackbarPos("test", "Capture"), int(nbFrames), self.tbCallback)
-        while(self.go):
-            ret, frame = self.c.read()
-            cv2.imshow("Capture", frame)
-            cv2.waitKey(25)
-
-    def quitCapture(self):
-        print "pressed Quit"
-        self.go=False
-        cv2.destroyAllWindows()
-        self.c.release()
-        QtCore.QCoreApplication.quit()
-        sys.exit()
-
-
-class Window(QtGui.QWidget):
-    def __init__(self):
-
-        QtGui.QWidget.__init__(self)
+        QtGui.QWidget.__init__(self, parent)
         self.setWindowTitle('Control Panel')
 
         self.capture = Capture()
@@ -77,5 +35,7 @@ class Window(QtGui.QWidget):
 #if __name__ == '__main__' :
 import sys
 app = QtGui.QApplication(sys.argv)
-window = Window()
-
+window = Example()
+widget = PanelControl(window)
+#window.setCentralWidget(window)
+sys.exit(app.exec_())
