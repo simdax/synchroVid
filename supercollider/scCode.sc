@@ -3,17 +3,18 @@
 ("hello ! SuperCollider s'ouvre avec le port "++NetAddr.langPort).postln;
 
 //ShutDown.add({"supercollider s'éteint ".postln});
-"duSon.sc".loadRelative;
+"duSon.scd".loadRelative;
+"timeline.scd".loadRelative;
 
 ~dic=(
 	quit: {0.exit},
 	play: { arg msg;
-		var seed;
-		var p=Pdef(\tout);
+		var seed, time;
 		seed=msg[1] ? 0;
+		time=msg[2] ? 10;
 		("playing avec seed de : "++[seed]).postln;
-		//Pdef(\tout, p);
-		Pdef(\tout).play
+		~timeline.time=time;
+		defer{~timeline.go}
 	},
 	pause: {Pdef(\tout).pause;
 		NetAddr("localhost", 9000).sendMsg("/Panic")},
