@@ -5,7 +5,7 @@ from PyQt4 import QtGui, QtCore
 
 # communication avec supercollider
 # oscPort=57121
-#import supercollider
+import supercollider
 from osc import *
 from capture import Capture
 from dialog import Example

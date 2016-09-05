@@ -1,7 +1,7 @@
 (
 
 ~timeline=(
-	time:100, pattern:Pdef(\tout), fps:1/25,
+	time:100, pattern:Pdef(\dispatch), fps:1/25,
 	pl:{ arg s, temps=s.time, offset=0;
 		s.tmpPattern=Pfindur(temps, PFF(offset, s.pattern)).play
 	},
