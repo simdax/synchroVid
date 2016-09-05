@@ -36,8 +36,11 @@ class Example(QtGui.QMainWindow):
     def showDialog(self):
 
         fname = QtGui.QFileDialog.getOpenFileName(self, 'Open file', '/home/simdax/Videos/')
+        #TODO encode pb
+        #fname=str(fname).encode('utf-8').decode('utf-8', 'replace')
         a=self.children()[-1]
         #a.capture.quitCapture()
+        print fname
         a.capture.c=cv2.VideoCapture(str(fname))
                                 
         
