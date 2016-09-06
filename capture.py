@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import cv2
+import os
 
 class Capture():
 
-    def __init__(self, filename="/home/simdax/Videos/Nirvana - In Bloom.mp4"):
+    def __init__(self, filename=os.path.abspath("video.mkv") ):
         print filename
         self.c = cv2.VideoCapture(str(filename))
         self.go = False
@@ -12,6 +13,8 @@ class Capture():
         #helper
     def tbCallback(self, n):
         self.c.set(1,n)
+        ret, frame = self.c.read()
+        cv2.imshow("Capture", frame)
         
     def togglePause(self):
         if self.go == False:
@@ -28,12 +31,9 @@ class Capture():
         while(self.go):
             ret, frame = self.c.read()
             cv2.imshow("Capture", frame)
-
             cv2.waitKey(25)
 
-    def quitCapture(self):
+    def stopCapture(self):
         self.go=False
         cv2.destroyAllWindows()
-        #self.c.release()
-       # QtCore.QCoreApplication.quit()
 

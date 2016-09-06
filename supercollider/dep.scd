@@ -1,4 +1,11 @@
 (
+var deps="PFF,Zyn".split($,);
 var path="https://github.com/simdax/";
-Quarks.install(path+/+"PFF")
+
+deps.do { |x|
+	x.postln;
+    Quarks.install(path+/+x);
+};
+
+
 )
