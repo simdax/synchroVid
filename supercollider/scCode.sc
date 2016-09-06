@@ -1,6 +1,6 @@
 (
 // live module
-"../live/main.scd".loadRelative;
+//"../live/main.scd".loadRelative;
 
 ("hello ! SuperCollider s'ouvre avec le port "++NetAddr.langPort).postln;
 

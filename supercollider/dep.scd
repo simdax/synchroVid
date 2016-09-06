@@ -1,11 +1,13 @@
 (
-var deps="PFF,Zyn".split($,);
+var simDeps="PFF,Zyn,ext,patternsSC".split($,);
+var deps="TabbedView2";
 var path="https://github.com/simdax/";
 
-deps.do { |x|
-	x.postln;
+simDeps.do { |x|
     Quarks.install(path+/+x);
 };
-
+deps.do { |x|
+    Quarks.install(x)
+}; 
 
 )

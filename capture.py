@@ -25,7 +25,7 @@ class Capture():
             
     def startCapture(self):
         self.togglePause()
-        cv2.namedWindow("Capture")
+        cv2.namedWindow("Capture",0)
         nbFrames= self.c.get(7)
         cv2.createTrackbar("test", "Capture", cv2.getTrackbarPos("test", "Capture"), int(nbFrames), self.tbCallback)
         while(self.go):
