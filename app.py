@@ -7,6 +7,8 @@ from PyQt4 import QtGui, QtCore
 # oscPort=57121
 import supercollider
 from osc import *
+
+
 from capture import Capture
 from dialog import Example
 
@@ -27,14 +29,12 @@ class PanelControl(QtGui.QWidget):
 
         self.capture = Capture()
         # set width / height
-        self.capture.c.set(3, 400)
-        self.capture.c.set(4, 400)
+        #        self.capture.c.set(4, 400)
 
         self.start_button = QtGui.QPushButton('Start/Pause',self)
         self.start_button.clicked.connect(self.start)
         self.stop_button = QtGui.QPushButton('Stop',self)
         self.stop_button.clicked.connect(self.stop)
-
         self.quit_button = QtGui.QPushButton('Quit',self)
         self.quit_button.clicked.connect(self.quit)
 

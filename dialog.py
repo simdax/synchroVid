@@ -11,14 +11,9 @@ class Example(QtGui.QMainWindow):
     
     def __init__(self):
         super(Example, self).__init__()
-        
         self.initUI()
         
     def initUI(self):      
-
-#        self.textEdit = QtGui.QTextEdit()
-#        self.setCentralWidget(self.textEdit)
-#        self.statusBar()
 
         openFile = QtGui.QAction(QtGui.QIcon('open.png'), 'Open', self)
         openFile.setShortcut('Ctrl+O')
@@ -42,6 +37,8 @@ class Example(QtGui.QMainWindow):
         #a.capture.quitCapture()
         print fname
         a.capture.c=cv2.VideoCapture(str(fname))
+        a.capture.createTB()
+        cv2.setTrackbarPos("test", "Capture", 0)
                                 
         
 def main():

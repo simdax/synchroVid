@@ -1,9 +1,11 @@
 
 # open supercollider
 import shlex,  subprocess
+import time
 
-#oscPort=57121
-# args="sclang -D supercollider/scCode.sc -u "+str(57120)
-# proc1=subprocess.Popen(shlex.split(args))
+time.sleep(1)
+oscPort=57120
+args="sclang -D supercollider/scCode.sc -u "+str(oscPort)
+proc1=subprocess.Popen(shlex.split(args))
 
 

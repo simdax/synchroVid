@@ -22,12 +22,15 @@ class Capture():
         else:
             self.go=False
 
-            
+    def createTB(self):
+        nbFrames= self.c.get(7)
+        cv2.createTrackbar("tb", "Capture", cv2.getTrackbarPos("tb", "Capture"), int(nbFrames), self.tbCallback)
+        
     def startCapture(self):
         self.togglePause()
+        # 0 uis for window normal
         cv2.namedWindow("Capture",0)
-        nbFrames= self.c.get(7)
-        cv2.createTrackbar("test", "Capture", cv2.getTrackbarPos("test", "Capture"), int(nbFrames), self.tbCallback)
+        self.createTB()
         while(self.go):
             ret, frame = self.c.read()
             cv2.imshow("Capture", frame)
