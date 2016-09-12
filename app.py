@@ -5,9 +5,8 @@ from PyQt4 import QtGui, QtCore
 
 # communication avec supercollider
 # oscPort=57121
-import supercollider
+#import supercollider
 from osc import *
-
 
 from capture import Capture
 from dialog import Example
@@ -19,7 +18,7 @@ class PanelControl(QtGui.QWidget):
         self.capture.stopCapture()
         msg("stop")
     def start(self):
-        msg("play")
+        msg("toggle")
         self.capture.startCapture()
 
     def __init__(self, parent=None):
@@ -59,3 +58,4 @@ window = Example()
 widget = PanelControl(window)
 #window.setCentralWidget(window)
 sys.exit(app.exec_())
+msg("quit")

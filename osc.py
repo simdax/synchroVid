@@ -1,7 +1,7 @@
 import OSC
 
 net = OSC.OSCClient()
-net.connect(("localhost", 57120))   # connect to SuperCollider
+net.connect(("localhost", 57121))   # connect to SuperCollider
 
 def msg(m, args=None):
     #print args

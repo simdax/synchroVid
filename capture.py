@@ -8,6 +8,7 @@ class Capture():
     def __init__(self, filename=os.path.abspath("video.mkv") ):
         print filename
         self.c = cv2.VideoCapture(str(filename))
+        print(self.c)
         self.go = False
 
         #helper
@@ -33,8 +34,11 @@ class Capture():
         self.createTB()
         while(self.go):
             ret, frame = self.c.read()
-            cv2.imshow("Capture", frame)
-            cv2.waitKey(25)
+            if frame is None:
+                self.tbCallback(0)
+            else:
+                cv2.imshow("Capture", frame)
+                cv2.waitKey(25)
 
     def stopCapture(self):
         self.go=False

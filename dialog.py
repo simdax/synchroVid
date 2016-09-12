@@ -37,8 +37,8 @@ class Example(QtGui.QMainWindow):
         #a.capture.quitCapture()
         print fname
         a.capture.c=cv2.VideoCapture(str(fname))
-        a.capture.createTB()
-        cv2.setTrackbarPos("test", "Capture", 0)
+        #a.capture.createTB()
+        #cv2.setTrackbarPos("test", "Capture", 0)
                                 
         
 def main():
